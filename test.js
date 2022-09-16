@@ -8,10 +8,14 @@ const home_ = document.querySelector("#home_menu");
 const skill_ = document.querySelector("#skill_menu");
 const real_ = document.querySelector("#real_menu");
 
+const items_skill = document.getElementsByClassName("item_skill");
+
 document.documentElement.style.setProperty("--px-header-top", "20px");
 document.documentElement.style.setProperty("--color-settings", "#1abc9c");
 
 window.addEventListener("load", (e) => {
+  console.log(items_skill.item(0).style)
+  //items_skill.map(el => console.log(el.style) )
   const { scrollTop, clientHeight } = document.documentElement;
   setMenuSelect(scrollTop);
   resizeElementHeight();
@@ -22,6 +26,7 @@ window.addEventListener("resize", (e) => {
 
 window.addEventListener("scroll", (e) => {
   const { scrollTop, clientHeight } = document.documentElement;
+  console.log(scrollTop, clientHeight);
   //Définition de la postion du header et de sa couleur
   if (scrollTop < 20) {
     document.documentElement.style.setProperty(
@@ -34,9 +39,21 @@ window.addEventListener("scroll", (e) => {
     header.style.backgroundColor = "grey";
     document.documentElement.style.setProperty("--px-header-top", "0px");
   }
-
   setMenuSelect(scrollTop);
+  if(scrollTop > 299 && items_skill[0].style.animationPlayState !== "running"){
+    console.log("test")
+    for(let i =0 ; i < items_skill.length; i++ ){
+      items_skill[i].style.animationPlayState = "running";
+    }
+  }
+
+
 });
+
+
+
+
+//Fonction qui sont utiliserau dessus
 
 //Resise des differentes section
 const resizeElementHeight = function () {
@@ -47,8 +64,6 @@ const resizeElementHeight = function () {
     parseInt(header.getBoundingClientRect().height) +
     "px";
 };
-
-
 //Donne a l'utilisateur une information graphique pour savoir dans quel section il se trouve
 const setMenuSelect = (scrollTop) => {
 

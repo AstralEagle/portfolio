@@ -91,6 +91,7 @@ header .active::after {
   justify-content: center;
   align-items: center;
   height: 650px;
+  box-shadow: 0px 5px 5px 0px black;
 }
 #home h2 {
   color: white;
@@ -129,7 +130,9 @@ header .active::after {
 #reseaux a:hover i {
   top: -5px;
   color: var(--color-settings, #1abc9c);
+  -webkit-animation: vibration 1s;
   animation: vibration 1s;
+  -webkit-animation-delay: 0s !important ;
   animation-delay: 0s !important ;
 }
 #home #div_img {
@@ -148,16 +151,74 @@ header .active::after {
   -webkit-filter: brightness(50%);
 
   filter: brightness(50%);
-  -webkit-animation: kenburns-top-right 15s ease-out both;
-  animation: kenburns-top-right 15s ease-out both;
+  -webkit-animation: zoom_img 13s ease-out both infinite alternate;
+  animation: zoom_img 13s ease-out both infinite alternate;
 }
 
 #skill {
   margin-top: -58px;
   padding-top: 58px;
+  background-color: #ffffff;
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%2395a5a6' fill-opacity='0.21' fill-rule='evenodd'%3E%3Cpath d='M0 40L40 0H20L0 20M40 40V20L20 40'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-@-webkit-keyframes kenburns-top-right {
+#skills {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  overflow: hidden;
+}
+.item_skill {
+  width: 40%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(177, 175, 175, 0.479);
+  margin: 5px 5px 5px 5px;
+  padding: 5px 5px 5px 5px;
+  border-radius: 15px;
+  animation: open_right 2s backwards;
+  animation-play-state: paused;
+}
+.item_skill.droite{
+  flex-direction: row-reverse;
+  animation: open_left 2s backwards;
+  animation-play-state: paused;
+
+
+}
+.item_skill h3 {
+  flex: 1;
+
+}
+.xp_barre {
+  display: block;
+  position: relative;
+  width: 50%;
+  height: 10px;
+  background-color: grey;
+  flex: 7;
+  border-radius: 5px;
+}
+.xp_view{
+  max-width: 80%;
+  width: 800px;
+  position: absolute;
+  top: -1px;
+  left: 0;
+  height: 12px;
+  background-color: var(--color-settings, #1abc9c);
+  border-radius: 5px;
+  animation: charging_xp 3s 5s backwards;
+}
+.item_skill.droite .xp_view{
+  right: 0px !important;
+  left: auto;
+}
+
+/* Animation */
+
+@-webkit-keyframes zoom_img {
   0% {
     transform: scale(1) translate(0, 0);
     transform-origin: 84% 16%;
@@ -167,8 +228,7 @@ header .active::after {
     transform-origin: right top;
   }
 }
-
-@keyframes kenburns-top-right {
+@keyframes zoom_img {
   0% {
     transform: scale(1) translate(0, 0);
     transform-origin: 84% 16%;
@@ -178,8 +238,6 @@ header .active::after {
     transform-origin: right top;
   }
 }
-
-/* Animation "a" */
 
 @-webkit-keyframes barreHeader {
   0% {
@@ -197,6 +255,7 @@ header .active::after {
     top: var(--px-header-top, 20px);
   }
 }
+
 @-webkit-keyframes h1_open {
   0% {
     width: 0px;
@@ -205,7 +264,6 @@ header .active::after {
     width: 550px;
   }
 }
-
 @keyframes h1_open {
   0% {
     width: 0px;
@@ -227,7 +285,6 @@ header .active::after {
     opacity: 1;
   }
 }
-
 @keyframes open_icon {
   0% {
     transform: translateY(-50px) rotateX(-3deg) scale(0);
@@ -241,7 +298,28 @@ header .active::after {
   }
 }
 
-
+@-webkit-keyframes vibration {
+  0%,
+  100% {
+    transform: translateX(0%);
+    transform-origin: 50% 50%;
+  }
+  15% {
+    transform: translateX(-10px) rotate(-6deg);
+  }
+  30% {
+    transform: translateX(5px) rotate(6deg);
+  }
+  45% {
+    transform: translateX(-5px) rotate(-3.6deg);
+  }
+  60% {
+    transform: translateX(3px) rotate(2.4deg);
+  }
+  75% {
+    transform: translateX(-2px) rotate(-1.2deg);
+  }
+}
 @keyframes vibration {
   0%,
   100% {
@@ -262,5 +340,35 @@ header .active::after {
   }
   75% {
     transform: translateX(-2px) rotate(-1.2deg);
+  }
+}
+
+@keyframes open_right {
+  0% {
+    transform: translateX(1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes open_left {
+  0% {
+    transform: translateX(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes charging_xp {
+  from{
+    width: 0%;
+  }
+  to{
+    width: 100%;
   }
 }
